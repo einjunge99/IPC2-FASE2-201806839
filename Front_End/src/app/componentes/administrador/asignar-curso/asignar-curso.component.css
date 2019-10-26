@@ -1,0 +1,7 @@
+.btn-login{background: #DE6262; color:#fff; font-weight:600;}
+.zoom{
+    transition: font-size 0.5s;
+}
+.zoom:hover {
+    font-size: 110%;
+  }

@@ -1,0 +1,75 @@
+<br>
+<div class="container">
+    <h1 class="display-4">Reporta una anomalía</h1>
+
+    <div class="row">
+        <div class="col">
+            <br>
+
+            <form [formGroup]="primerForm" (ngSubmit)="agregarTicket ()">
+
+                <div class="form-row">
+                    <div class="col-md-10 mb-3">
+
+                        <label>Asunto</label>
+                        <input type="text" class="form-control " formControlName="asunto"
+                            [ngClass]="{ 'is-invalid': submitted && ff.asunto.errors } ">
+                        <div *ngIf="submitted && ff.asunto.errors" class="invalid-feedback">
+                            <div *ngIf="ff.asunto.errors.required">Campo obligatorio</div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-10 mb-3">
+                        <label>Contenido</label>
+                        <textarea class="form-control" formControlName="contenido" id="exampleFormControlTextarea1"
+                            rows="3" [ngClass]="{ 'is-invalid': submitted && ff.contenido.errors }"></textarea>
+                        <div *ngIf="submitted && ff.contenido.errors" class="invalid-feedback">
+                            <div *ngIf="ff.contenido.errors.required">Campo obligatorio</div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <button class="btn btn-login" type="submit">Reportar</button>
+                <br>
+                <br>
+
+            </form>
+        </div>
+
+        <div class="col">
+            <br>
+            <h1 class="font-weight-light">Tus tickets</h1>
+            <div *ngIf="ticket.length==0">
+                    <h3 class="font-weight-light">ups...parece que aquí no hay nada</h3>
+            </div>
+            <br>
+
+            <div class="card-deck">
+                <div class="panel-group" *ngFor="let info of ticket">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{info.asunto}}</h5>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                disabled>{{info.contenido}}</textarea>
+                            <div *ngIf="info.accion!=''">
+                                <p class="card-text"> <small class="text-muted">Acción: {{info.accion}}</small></p>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <p class="card-text">Estado: {{info.estado}}</p>
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

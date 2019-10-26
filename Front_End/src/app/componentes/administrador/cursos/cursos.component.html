@@ -1,0 +1,221 @@
+<br>
+
+<div class="container">
+  <h1 class="display-4">Creación de cursos</h1>
+  <br>
+  <div class="row">
+    <div class="col">
+
+      <div class="row">
+        <div class="col-6">
+          <form [formGroup]="primerForm" (ngSubmit)="agregarCurso()">
+            <div class="form-row">
+              <div class="col-9">
+                <label>Código de curso</label>
+                <br>
+                <small class="text-muted">En formato X-X-X con enteros</small>
+                <input type="text" formControlName="nombre" class="form-control" maxlength="3" minlength="3"
+                  pattern="[0-9]*" [ngClass]="{ 'is-invalid': submitted && f.nombre.errors } ">
+                <div *ngIf="submitted && f.nombre.errors" class="invalid-feedback">
+                  <div *ngIf="f.nombre.errors.required">Campo obligatorio</div>
+                </div>
+              </div>
+
+
+
+            </div>
+            <div class="form-row">
+              <div class="col-9">
+                <label>Nombre</label>
+                <input type="text" formControlName="descripcion" class="form-control "
+                  [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors } ">
+                <div *ngIf="submitted && f.descripcion.errors" class="invalid-feedback">
+                  <div *ngIf="f.descripcion.errors.required">Campo obligatorio</div>
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <button class="btn btn-login" type="submit">Ingresar</button>
+            <br>
+            <br>
+            <div class="form-row">
+            </div>
+          </form>
+        </div>
+
+        <div class="col">
+
+
+          <h2 class="font-weight-light" style="color: #DE6262;">IMPORTANTE</h2>
+          <h4 class="font-weight-light"> Fecha límite de asignación</h4>
+          <h6 class="font-weight-light"> Actual: <b>{{registroFecha[0].fechaLimite}}</b></h6>
+          <form [formGroup]="tercerForm" (ngSubmit)="updateLimite()">
+            <input formControlName="limite" type="date" class="form-control">
+
+            <br>
+            <button class="btn btn-secondary" type="submit" [disabled]="tercerForm.invalid">Confirmar</button>
+          </form>
+
+
+
+        </div>
+      </div>
+
+      <div class="row">
+
+        <h1 class="font-weight-light">Datos adicionales de cursos</h1>
+        <br>
+
+
+        <form [formGroup]="segundoForm" (ngSubmit)="agregarCursoDetalle()">
+
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label>Código de Curso</label>
+
+              <select class="form-control" formControlName="cod">
+                <option selected>Tu selección</option>
+                <option *ngFor="let curso of registroCurso">{{curso.nombre}}-{{curso.descripcion}}</option>
+
+              </select>
+            </div>
+          </div>
+
+
+          <div class="form-row">
+            <div class="col-md-10 mb-3">
+
+              <div class="row">
+                <div class="col">
+                  <label>Sección de curso</label>
+                  <input type="text" class="form-control " formControlName="seccion" maxlength="2"
+                    pattern="[A-Z]*[-|+]*" [ngClass]="{ 'is-invalid': submitted2 && ff.seccion.errors } ">
+                  <div *ngIf="submitted && ff.seccion.errors" class="invalid-feedback">
+                    <div *ngIf="ff.seccion.errors.required">Campo obligatorio</div>
+                  </div>
+
+
+                </div>
+                <div class="col">
+                  <label>Semestre</label>
+                  <input type="text" class="form-control " formControlName="semestre" maxlength="1" pattern="[1-2]*"
+                    [ngClass]="{ 'is-invalid': submitted2 && ff.semestre.errors } ">
+                  <div *ngIf="submitted && ff.semestre.errors" class="invalid-feedback">
+                    <div *ngIf="ff.semestre.errors.required">Campo obligatorio</div>
+                  </div>
+                </div>
+                <div class="col">
+                  <label>Año</label>
+                  <input type="text" class="form-control " formControlName="anio" maxlength="4" minlength="4"
+                    pattern="[0-9]*" [ngClass]="{ 'is-invalid': submitted2 && ff.anio.errors }">
+                  <div *ngIf="submitted && ff.anio.errors" class="invalid-feedback">
+                    <div *ngIf="ff.anio.errors.required">Campo obligatorio</div>
+                  </div>
+                </div>
+
+
+              </div>
+
+
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-10 mb-3">
+              <label>Horario</label>
+              <div class="row">
+                <div class="col">
+                  <small class="text-muted">Hora de inicio</small>
+                  <input type="time" formControlName="inicio" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted2 && ff.inicio.errors }">
+                  <div *ngIf="submitted && ff.inicio.errors" class="invalid-feedback">
+                    <div *ngIf="ff.inicio.errors.required">Campo obligatorio</div>
+                  </div>
+                </div>
+                <div class="col">
+                  <small class="text-muted">Hora de finalización</small>
+                  <input type="time" formControlName="fin" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted2 && ff.fin.errors }">
+                  <div *ngIf="submitted && ff.fin.errors" class="invalid-feedback">
+                    <div *ngIf="ff.fin.errors.required">Campo obligatorio</div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+
+
+          <button class="btn btn-login" type="submit">Ingresar</button>
+          <br>
+          <br>
+     
+        </form>
+        <br>
+      </div>
+
+    </div>
+
+
+
+
+
+    <div class="col">
+        <h3 class="font-weight-light">Para administrar un curso, pulse sobre él </h3>
+      <div *ngFor="let res of registroAnios">
+        <h2 class="font-weight-light"><b>{{res.anio}}</b></h2>
+        <br>
+        <div *ngFor="let data of registroCurso">
+
+          <div class="card grow" (click)="eliminar(data.cod_CURSO)">
+            <div class="card-header">
+              {{data.nombre}} {{data.descripcion}}
+            </div>
+            <div class="card-body text-right">
+              Primer Semestre
+              <div *ngFor="let info of registroAsignacion">
+                <div *ngIf="res.anio==info.anio">
+                  <div *ngIf="data.cod_CURSO==info.fk_cod_CURSO">
+                    <div *ngIf="info.semestre==1">
+                      <footer class="blockquote-footer">
+                        <small>
+                          Sección: {{info.seccion}} <cite title="Source Title">Horario:
+                            {{info.inicio}}-{{info.fin}}</cite>
+                        </small>
+                      </footer>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              Segundo Semestre
+              <div *ngFor="let info of registroAsignacion">
+                <div *ngIf="res.anio==info.anio">
+                  <div *ngIf="data.cod_CURSO==info.fk_cod_CURSO">
+                    <div *ngIf="info.semestre==2">
+                      <footer class="blockquote-footer">
+                        <small>
+                          Sección: {{info.seccion}} <cite title="Source Title">Horario:
+                            {{info.inicio}}-{{info.fin}}</cite>
+                        </small>
+                      </footer>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <br>
+
+        </div>
+
+      </div>
+
+
+
+      <br>
+    </div>
+  </div>
+</div>

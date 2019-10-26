@@ -1,0 +1,125 @@
+<div class="container">
+    <br>
+    <h1 class="display-4">Actividades del curso</h1>
+    <br>
+    <div *ngIf="actividades.length==0&&actividadesEntregadas.length==0">
+        <h1 class="display-5">ups...parece que no hay nada aquí :(</h1>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h1 class="font-weight-light">Actividades</h1>
+            <br>
+            <div class="card-deck">
+                <div class="panel-group" *ngFor="let act of actividades">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{act.descripcion}}</h5>
+
+                            <p class="card-text"> {{act.fecha}} <small class="text-muted">{{act.limite}}</small></p>
+                            <div *ngIf="act.archivo=='false'">
+                                <form [formGroup]="primerForm">
+                                    <textarea class="form-control" formControlName="contenido"
+                                        id="exampleFormControlTextarea1" rows="3"></textarea>
+
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <div *ngIf="act.completa > completo">
+                                <button class="btn btn-login" (click)="agregarNota(act.cod_ACTIVIDAD)">Entregar</button>
+                            </div>
+                            <div *ngIf="act.completa <= completo">
+                                <p class="card-text"> FUERA DE TIEMPO</p>
+                            </div>
+
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <div class="panel-group" *ngFor="let entrega of actividadesEntregadas">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{entrega.descripcion}}</h5>
+
+                            <p class="card-text"> {{entrega.fecha}} <small class="text-muted">{{entrega.limite}}</small>
+                            </p>
+                            <div *ngIf="entrega.archivo=='false'">
+                                <form [formGroup]="primerForm">
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                        disabled>{{entrega.contenido}}</textarea>
+
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <p class="card-text">Nota: {{entrega.nota}}/100</p>
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <h1 class="font-weight-light">Evaluaciones</h1>
+            <br>
+
+            <div class="panel-group">
+                <div *ngFor="let act of evaluaciones">
+                    <div class="card-deck">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{act.titulo}}</h4>
+                                    <div *ngIf="act.estado!='ACTIVAR'">
+                                        <p class="card-text"><small class="text-muted">Evaluación habilitado</small></p>
+                                    </div>
+                                    <div *ngIf="act.estado=='ACTIVAR'">
+                                        <p class="card-text"><small class="text-muted">Evaluación deshabilitado</small>
+                                        </p>
+                                    </div>
+
+                                </div>
+                                <div class="card-footer">
+                                    <div *ngIf="act.estado!='ACTIVAR'">
+                                        <button class="btn btn-as" (click)="inicio(act.cod_EVALUACION)">Iniciar</button>
+                                    </div>
+                                    <div *ngIf="act.estado=='ACTIVAR'">
+                                        <button class="btn btn-login" disabled>Iniciar</button>
+                                    </div>
+                                </div>
+                                <div>
+                                </div>
+                            </div>
+
+               
+                    </div>
+                    <br>
+                </div>
+            </div>
+            <div *ngFor="let act of evaluacionesEntregadas">
+                <div class="panel-group">
+                    <div class="card-deck">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{act.titulo}}</h4>
+                                </div>
+                                <div class="card-footer">
+                                    Nota: {{act.nota}}/100
+                                </div>
+                                <div>
+                                </div>
+                            </div>
+                        <br>
+                    </div>
+                </div>
+                <br>
+            </div>
+
+        </div>
+    </div>
+</div>

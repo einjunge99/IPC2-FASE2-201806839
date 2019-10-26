@@ -1,0 +1,66 @@
+
+    <br>
+    <div class="container">
+        <div class="row ">
+            <div class="col ">
+                <h1 class="display-4">Auxiliar seleccionado</h1>
+                <br>
+
+                <div class="card-deck">
+                    <div class="panel-group" *ngFor="let auxi of resultado">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{auxi.nombre}}</h5>
+                                <p class="card-text">{{auxi.carne}}</p>
+
+                            </div>
+                            <div class="card-footer">
+                                <div *ngFor="let asignado of registroAsignados">
+                                    <div class="zoom" (click)="desasignar(asignado.cod_ASIGNACION)"> <b style="color: red;" >X </b> <b>Código: </b>{{asignado.nombre}} <b>Nombre:
+                                        </b>{{asignado.descripcion}}</div>
+                                        <small class="text-muted"><b>Seccion:</b> {{asignado.seccion}} <b>Inicio:</b> {{asignado.inicio}} <b>Fin: </b>{{asignado.fin}}</small>
+                                </div>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <h1 class="display-4">Cursos disponibles</h1>
+                <br>
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label>Código de Curso</label>
+
+                        <select class="form-control" [(ngModel)]="cursoSelect" id="select" (change)="horario()">
+                            <option *ngFor="let curso of registroCurso">{{curso.nombre}}-{{curso.descripcion}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+
+                    <div class="col-sm-4">
+                        <label>Horario</label>
+                        <select class="form-control" [(ngModel)]="horarioSelect" id="inicio" (change)="seccion()">
+                            <option *ngFor="let horario of registroHorario">{{horario.inicio}}-{{horario.fin}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <label>Sección</label>
+                        <select class="form-control" [(ngModel)]="seccionSelect" id="seccion">
+                            <option *ngFor="let curso of registroSeccion">{{curso.seccion}}</option>
+                        </select>
+                    </div>
+
+                </div>
+                <br>
+                <div class="form-row">
+                    <button type="submit" class="btn btn-login float-right" (click)="asignar()">Asignar</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>

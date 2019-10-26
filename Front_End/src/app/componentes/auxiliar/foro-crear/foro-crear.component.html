@@ -1,0 +1,101 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <br>
+            <h1 class="display-4">Creación de foros</h1>
+            <br>
+
+            <form [formGroup]="primerForm" (ngSubmit)="agregarForo ()">
+
+                <div class="form-row">
+                    <div class="col-md-10 mb-3">
+
+                        <label>Nombre o título de foro</label>
+                        <input type="text" class="form-control " formControlName="nombre"
+                            [ngClass]="{ 'is-invalid': submitted && ff.nombre.errors } ">
+                        <div *ngIf="submitted && ff.nombre.errors" class="invalid-feedback">
+                            <div *ngIf="ff.nombre.errors.required">Campo obligatorio</div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                        <div class="col-md-10 mb-3">
+                            <label>Descripcion</label>
+                            <textarea class="form-control" formControlName="contenido" id="exampleFormControlTextarea1"
+                                rows="3" [ngClass]="{ 'is-invalid': submitted && ff.contenido.errors }"></textarea>
+                            <div *ngIf="submitted && ff.contenido.errors" class="invalid-feedback">
+                                <div *ngIf="ff.contenido.errors.required">Campo obligatorio</div>
+                            </div>
+                        </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-10 mb-3">
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="md-form">
+                                    <label for="inputMDEx">Fecha de entrega</label>
+                                    <input type="date" id="inputMDEx" formControlName="fecha" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && ff.fecha.errors } ">
+                                    <div *ngIf="submitted && ff.fecha.errors" class="invalid-feedback">
+                                        <div *ngIf="ff.fecha.errors.required">Campo obligatorio</div>
+                                        <div *ngIf="ff.fecha.errors.max">Fecha inválida</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+
+                                <label>Hora limite</label>
+                                <input type="time" formControlName="limite" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && ff.limite.errors }">
+                                <div *ngIf="submitted && ff.limite.errors" class="invalid-feedback">
+                                    <div *ngIf="ff.limite.errors.required">Campo obligatorio</div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+           
+                <br>
+
+                <button class="btn btn-login" type="submit">Ingresar</button>
+                <br>
+                <br>
+
+            </form>
+        </div>
+
+        <div class="col">
+            <br>
+            <br>
+            <div class="card-deck">
+                <div class="panel-group" *ngFor="let act of foros">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">{{act.titulo}}</h4>
+                            <h6 class="card-title">Descripcion </h6>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                disabled>{{act.descripcion}}</textarea>
+                            <p class="card-text"> <small class="text-muted">Limite: {{act.completa}}</small></p>
+                        </div>
+                        <div class="card-footer">
+                                <button class="btn btn-login" (click)="mensajes(act.cod_FORO)">Detalles</button>
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

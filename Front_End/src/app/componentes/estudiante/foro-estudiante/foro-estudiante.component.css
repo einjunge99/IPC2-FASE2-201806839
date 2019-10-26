@@ -1,0 +1,21 @@
+.btn-login{background: #DE6262; color:#fff; font-weight:600;}
+
+.section {
+    display: block;
+    background: #fff;
+    border-bottom: 1px solid #f1f1f1;
+    cursor: pointer;
+    margin: 0;
+    opacity: 0.7;
+    transform: scale(0.85);
+    transition: all 700ms;
+}
+.section.open {
+    margin: 20px 0;
+    opacity: 1;
+    transform: scale(1);
+}
+.hola{
+    cursor: pointer;
+
+}

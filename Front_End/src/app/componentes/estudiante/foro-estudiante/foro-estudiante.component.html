@@ -1,0 +1,159 @@
+<br>
+<div class="container">
+
+    <div *ngFor="let data of detalles">
+        <h1 class="display-4 text-center">{{data.titulo}}</h1>
+        <h2 class=" text-center text-muted"><small>{{data.descripcion}}</small></h2>
+        <div *ngIf="completo>data.completa">
+            <h3 class=" text-center" style="color: #DE6262;"><small>Foro deshabilitado</small></h3>
+        </div>
+
+    </div>
+    <br>
+    <form [formGroup]="primerForm" (ngSubmit)="mensaje()">
+        <div class="row">
+            <div class="col">
+                <div *ngFor="let data of detalles">
+                    <div *ngIf="completo<data.completa">
+                        <input type="text" style="text-align: end;" class="form-control " maxlength="250"
+                            formControlName="nombre" [ngClass]="{ 'is-invalid': submitted && ff.nombre.errors } ">
+                    </div>
+                    <div *ngIf="completo>data.completa">
+                        <input type="text" style="text-align: center;" placeholder="no se admiten más entradas"
+                            style="text-align: end;" class="form-control " maxlength="250" formControlName="nombre"
+                            [ngClass]="{ 'is-invalid': submitted && ff.nombre.errors } " disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="col-align-self-end">
+
+                <button class="btn btn-login" [disabled]="primerForm.invalid" type="submit"><b>✓</b></button>
+            </div>
+        </div>
+    </form>
+    <br>
+
+    <div class="panel-group" *ngFor="let data of mensajes">
+        <div *ngIf="codUsuario==data.cod_USUARIO">
+            <div class="card text-right">
+                <div class="card-body">
+
+                    <blockquote class="blockquote mb-0" (click)="toggle(data)">
+                        <p>{{data.comentario}}</p>
+                        <footer class="blockquote-footer">Tu <cite
+                                title="Source Title"><small>{{data.fecha}}</small></cite></footer>
+
+                        <div class="panel-group text-left" *ngFor="let res of respuestas">
+                            <div *ngIf="data.cod_AFORO==res.fk_cod_AFORO">
+                                <footer class="blockquote-footer">
+                                    {{res.comentario}}
+                                    <small>
+                                        <br>
+                                        <div *ngIf="codUsuario==res.fk_cod_USUARIO">
+                                            <b>Tu</b> {{res.fecha}}
+                                        </div>
+                                        <div *ngIf="codUsuario!=res.fk_cod_USUARIO">
+                                            <b>{{res.nombre}}</b> {{res.fecha}}
+                                        </div>
+                                    </small>
+                                </footer>
+                            </div>
+                        </div>
+                    </blockquote>
+                    <ng-container *ngIf="data.activo">
+                        <form [formGroup]="segundoForm" (ngSubmit)="respuesta(data.cod_AFORO)">
+
+                            <div class="row">
+                                <div class="col">
+                                    <div *ngFor="let data of detalles">
+                                        <div *ngIf="completo<data.completa">
+                                            <input type="text" style="text-align: end;" class="form-control "
+                                                maxlength="250" formControlName="nombre"
+                                                [ngClass]="{ 'is-invalid': submitted2 && f.nombre.errors } ">
+                                        </div>
+                                        <div *ngIf="completo>data.completa">
+                                            <input type="text" style="text-align: center;"
+                                                placeholder="no se admiten más entradas" style="text-align: end;"
+                                                class="form-control " maxlength="250" formControlName="nombre"
+                                                [ngClass]="{ 'is-invalid': submitted2 && f.nombre.errors } " disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-align-self-end">
+
+                                    <button class="btn btn-login" [disabled]="segundoForm.invalid"
+                                        type="submit"><b>✓</b></button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </ng-container>
+
+                </div>
+            </div>
+        </div>
+        <div *ngIf="codUsuario!=data.cod_USUARIO">
+            <div class="card text-left">
+                <div class="card-body">
+
+                    <blockquote class="blockquote mb-0" (click)="toggle(data)">
+
+                        <p>{{data.comentario}}</p>
+                        <footer class="blockquote-footer">{{data.nombre}} <cite
+                                title="Source Title"><small>{{data.fecha}}</small></cite></footer>
+                        <div class="panel-group text-right" *ngFor="let res of respuestas">
+                            <div *ngIf="data.cod_AFORO==res.fk_cod_AFORO">
+                                <footer class="blockquote-footer">
+                                    {{res.comentario}}
+                                    <small>
+                                        <br>
+                                        <div *ngIf="codUsuario==res.fk_cod_USUARIO">
+                                            <b>Tu</b> {{res.fecha}}
+                                        </div>
+                                        <div *ngIf="codUsuario!=res.fk_cod_USUARIO">
+                                            <b>{{res.nombre}}</b> {{res.fecha}}
+                                        </div>
+                                    </small>
+                                </footer>
+                            </div>
+                        </div>
+                    </blockquote>
+
+                    <ng-container *ngIf="data.activo">
+                        <form [formGroup]="segundoForm" (ngSubmit)="respuesta(data.cod_AFORO)">
+
+                            <div class="row">
+                                <div class="col">
+                                    <div *ngFor="let data of detalles">
+                                        <div *ngIf="completo<data.completa">
+                                            <input type="text" style="text-align: end;" class="form-control "
+                                                maxlength="250" formControlName="nombre"
+                                                [ngClass]="{ 'is-invalid': submitted2 && f.nombre.errors } ">
+                                        </div>
+                                        <div *ngIf="completo>data.completa">
+                                            <input type="text" style="text-align: center;"
+                                                placeholder="no se admiten más entradas" style="text-align: end;"
+                                                class="form-control " maxlength="250" formControlName="nombre"
+                                                [ngClass]="{ 'is-invalid': submitted2 && f.nombre.errors } " disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-align-self-end">
+
+                                    <button class="btn btn-login" [disabled]="segundoForm.invalid"
+                                        type="submit"><b>✓</b></button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </ng-container>
+                </div>
+            </div>
+
+
+        </div>
+
+        <br>
+    </div>
+
+</div>

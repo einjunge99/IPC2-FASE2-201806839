@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <br>
+            <h1 class="display-4">Creación de evaluaciones</h1>
+            <br>
+
+            <form [formGroup]="primerForm">
+
+                <div class="form-row">
+                    <div class="col-md-10 mb-3">
+
+                        <label>Nombre o título de evaluación</label>
+                        <div class="row">
+                            <div class="col-10">
+                                <input type="text" class="form-control " formControlName="nombre"
+                                    [ngClass]="{ 'is-invalid': submitted && ff.nombre.errors } ">
+                                <div *ngIf="submitted && ff.nombre.errors" class="invalid-feedback">
+                                    <div *ngIf="ff.nombre.errors.required">Campo obligatorio</div>
+
+                                </div>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-no prueba" type="submit">N</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-login"  (click)="agregarEvaluacion ()" [disabled]="primerForm.invalid" type="submit">Ingresar</button>
+
+                <br>
+                <br>
+
+            </form>
+        </div>
+
+        <div class="col">
+            <br>
+            <br>
+            <div class="card-deck">
+                <div class="panel-group" *ngFor="let act of evaluacion">
+                    <div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">{{act.titulo}}</h4>
+                                <p class="card-text" (click)="preguntas(act.cod_EVALUACION)"> <small
+                                        class="text-muted puntero">Agregar preguntas</small></p>
+                            </div>
+                            <div class="card-footer">
+                                <div *ngIf="act.estado=='ACTIVAR'">
+                                    <button class="btn btn-login"
+                                        (click)="estado(act.cod_EVALUACION,act.estado)">Habilitar</button>
+                                </div>
+                                <div *ngIf="act.estado!='ACTIVAR'">
+                                    <button class="btn btn-as"
+                                        (click)="estado(act.cod_EVALUACION,act.estado)">Deshabilitar</button>
+                                </div>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

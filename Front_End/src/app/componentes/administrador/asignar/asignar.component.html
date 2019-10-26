@@ -1,0 +1,130 @@
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col">
+
+            <h1 class="display-4">Busqueda personalizada</h1>
+            <br>
+            <h3 class="font-weight-light">Asigna un auxiliar a un curso seleccionandolo</h3>
+            <br>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label>Nombre</label>
+                    <br>
+                    <input class="form-control" type="text" [(ngModel)]="searchTerm" value=" ">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label>Carne</label>
+                    <br>
+                    <input class="form-control" type="text" [(ngModel)]="searchTerm2" value=" ">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label>Correo electrónico</label>
+                    <br>
+                    <input class="form-control" type="text" [(ngModel)]="searchTerm3" value=" ">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+
+                        <h4 class="font-weight-light" style="color: #DE6262;"><b>Cambio de opinión?</b></h4>
+                        <h5 class="font-weight-light">Pulsa el botón <i>Desplegar</i> para desasignar por curso </h5>
+           
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-login" data-toggle="modal" data-target=".bd-example-modal-lg">
+                        Desplegar
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Cursos con auxiliar</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table">
+                                        <thead class="thead-dark">
+                                        
+                                            <tr>
+                         
+                                                <th scope="col">#</th>
+                                                <th scope="col">Año</th>
+                                                <th scope="col">Curso</th>
+                                                <th scope="col">Semestre</th>
+                                                <th scope="col">Sección</th>
+                                                <th scope="col">Auxiliar</th>
+                                                <th scope="col">Carne</th>
+                   
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let data of cursosAsignados" >
+                                 
+                                                <th scope="row">{{data.nombre}}</th>
+                                                <td>{{data.anio}}</td>
+                                                <td>{{data.descripcion}}</td>
+                                                <td>{{data.semestre}}</td>
+                                                <td>{{data.seccion}}</td>
+                                                <td class="puntero" (click)="prueba(data.cod_USUARIO,data.cod_ASIGNACION)">{{data.aux}} <b style="color:#DE6262;" >X </b></td>
+                                                <td>{{data.carne}}</td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+                             
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col">
+            <div class="card-deck">
+                <div class="panel-group" *ngFor="let auxi of auxFiltrados">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{auxi.nombre}}</h5>
+                            <p class="card-text">{{auxi.carne}}</p>
+                            <small>
+                                <p class="card-text"><b>Correo: </b>{{auxi.correo}}</p>
+                            </small>
+                            <small>
+                                <p class="card-text"><b>Contraseña: </b>{{auxi.contra}}</p>
+                            </small>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-login" (click)="asignar(auxi.cod_USUARIO)">Detalles</button>
+                        </div>
+
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <br>
+    <div class="row">
+
+
+        <br>
+
+    </div>
+</div>

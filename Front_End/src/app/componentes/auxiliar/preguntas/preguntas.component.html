@@ -1,0 +1,68 @@
+<div class="container">
+        <br>
+        <h1 class="display-4">Preguntas</h1>
+        <br>
+
+    <div class="row">
+        <div class="col">
+   
+            <form [formGroup]="primerForm" >
+
+                <div class="form-row">
+                    <div class="col-md-10 mb-3">
+
+                        <label>Enunciado de la pregunta</label>
+                        <div class="row">
+                            <div class="col-10">
+                                <input type="text" class="form-control " formControlName="nombre"
+                                    [ngClass]="{ 'is-invalid': submitted && ff.nombre.errors } ">
+                                <div *ngIf="submitted && ff.nombre.errors" class="invalid-feedback">
+                                    <div *ngIf="ff.nombre.errors.required">Campo obligatorio</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-as prueba" type="submit">V</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <br>
+                <button class="btn btn-login" (click)="agregarPregunta()" [disabled]="primerForm.invalid" type="submit">Ingresar</button>
+
+                <br>
+                <br>
+
+            </form>
+        </div>
+
+        <div class="col">
+                <div *ngIf="preguntas.length==0">
+                        <h1 class="display-4">Ups...parece que no hay nada aquí</h1>
+                    </div>
+
+            <div *ngFor="let data of preguntas">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-10">
+                                    <h5 class="card-title"> {{data.descripcion}}</h5>
+                                </div>
+                                <div class="col">
+                                    <div *ngIf="data.estado=='F'">
+                                    <button class="btn btn-login" >F</button>
+                                </div>
+                                <div *ngIf="data.estado=='V'">
+                                        <button class="btn btn-as" disabled>V</button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+                <br>
+            </div>
+        </div>
+
+    </div>
+</div>

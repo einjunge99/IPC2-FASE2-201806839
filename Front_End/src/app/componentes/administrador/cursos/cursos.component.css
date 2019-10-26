@@ -1,0 +1,6 @@
+.btn-login{background: #DE6262; color:#fff; font-weight:600;}
+
+.grow { transition: all .2s ease-in-out; }
+.grow:hover { 
+    transform: scale(1.05); 
+}

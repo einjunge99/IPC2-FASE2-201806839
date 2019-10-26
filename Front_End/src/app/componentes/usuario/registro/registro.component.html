@@ -1,0 +1,60 @@
+<section class="login-block">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col col-lg-6 login-sec">
+                <h2 class="text-center">Registro de Usuario</h2>
+                <form class="login-form" [formGroup]="primerForm" (ngSubmit)="agregarUsuario()">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="text-uppercase">nombre</label>
+                        <input type="text" class="form-control" formControlName="nombre" pattern="[A-Z|a-z]*"  [ngClass]="{ 'is-invalid': submitted && f.nombre.errors}">
+                        <div *ngIf="submitted && f.nombre.errors" class="invalid-feedback">
+                                <div *ngIf="f.nombre.errors.required">Campo obligatorio</div>
+                                <div *ngIf="f.nombre.errors.pattern">Formato invalido</div>
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="text-uppercase">Carné estudiantil</label>
+                        <input type="text" class="form-control" formControlName="carne" minlength="9" maxlength="9" pattern="[0-9]*" [ngClass]="{ 'is-invalid': submitted && f.carne.errors}">
+                        <div *ngIf="submitted && f.carne.errors" class="invalid-feedback">
+                                <div *ngIf="f.carne.errors.required">Campo obligatorio</div>
+                                <div *ngIf="f.carne.errors.pattern">Formato invalido</div>
+                            </div>
+                   
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="text-uppercase">Correo electrónico</label>
+                        <input type="text" class="form-control" formControlName="correo"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{3}$" [ngClass]="{ 'is-invalid': submitted && f.correo.errors}">
+                        <div *ngIf="submitted && f.correo.errors" class="invalid-feedback">
+                                <div *ngIf="f.correo.errors.required">Campo obligatorio</div>
+                                <div *ngIf="f.correo.errors.pattern">Formato invalido</div>
+                            </div>
+                        
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" class="text-uppercase">Contraseña</label>
+                        <br>
+                        <small class="text-muted">Debe incluir mínimo una mayuscula y un número. Ocho caracteres</small>
+                        <input type="password" class="form-control" formControlName="contra"  pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z\d$@$!%*?&].{8,}" [ngClass]="{ 'is-invalid': submitted && f.contra.errors}">
+                        <div *ngIf="submitted && f.contra.errors" class="invalid-feedback">
+                                <div *ngIf="f.contra.errors.required">Campo obligatorio</div>
+                                <div *ngIf="f.contra.errors.pattern">Formato invalido</div>
+                         </div>
+                    </div>
+
+
+                    <div class="form-check">
+
+                      <button type="submit" class="btn btn-login float-right">Registrar</button>
+                      <small>Regresar al menu de <a routerLink=""><b>inicio</b></a></small>
+    
+                      
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</section>

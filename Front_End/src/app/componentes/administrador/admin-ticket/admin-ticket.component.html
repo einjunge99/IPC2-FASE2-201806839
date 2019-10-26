@@ -1,0 +1,97 @@
+<div class="container">
+    <br>
+    <h1 class="display-4">Reporta una anomalia</h1>
+    <br>
+    <div class="row">
+
+        <div class="col">
+
+            <form [formGroup]="primerForm" (ngSubmit)="agregarRespuesta()">
+
+                <div class="form-row">
+                    <div class="col-md-10 mb-3">
+                        <label>Asunto:</label>
+
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-10 mb-3">
+                        <input class="form-control" formControlName="titulo" disabled>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-10 mb-3">
+                        <label>Tu respuesta:</label>
+                        <textarea class="form-control" formControlName="asunto" id="exampleFormControlTextarea1"
+                            rows="3" [ngClass]="{ 'is-invalid': submitted && ff.asunto.errors }"></textarea>
+                        <div *ngIf="submitted && ff.asunto.errors" class="invalid-feedback">
+                            <div *ngIf="ff.asunto.errors.required">Campo obligatorio</div>
+                        </div>
+                    </div>
+
+                </div>
+                <button class="btn btn-login" [disabled]="primerForm.invalid" type="submit">Enviar</button>
+                <br>
+                <br>
+
+            </form>
+        </div>
+
+        <div class="col">
+            <h1 class="font-weight-light">Tus tickets</h1>
+ 
+            <div *ngFor="let info of ticketPendiente">
+                <div class="card-deck">
+                    <div class="panel-group">
+                        <div class="card" (click)="evento(info.asunto,info.cod_TICKET)">
+                            <div class="card-body">
+                                <h5 class="card-title">{{info.descripcion}} {{info.seccion}}</h5>
+                                <p class="card-text"> <small class="text-muted"><b>Aux:</b> {{info.nombre}}
+                                        {{info.carne}}</small></p>
+                                <h4 class="card-title">{{info.asunto}}</h4>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                    disabled>{{info.contenido}}</textarea>
+                                <div *ngIf="info.accion!=''">
+                                    <p class="card-text"> <small class="text-muted">Acción: {{info.accion}}</small></p>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <p class="card-text">Estado: {{info.estado}}</p>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div *ngFor="let info of ticketAtendido">
+                <div class="panel-group">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{info.descripcion}} {{info.seccion}}</h5>
+                            <p class="card-text"> <small class="text-muted"><b>Aux:</b> {{info.nombre}}
+                                    {{info.carne}}</small></p>
+                            <h4 class="card-title">{{info.asunto}}</h4>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                disabled>{{info.asunto}}</textarea>
+                            <div *ngIf="info.accion!=''">
+                                <p class="card-text"> <small class="text-muted">Acción: {{info.accion}}</small></p>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <p class="card-text">Estado: {{info.estado}}</p>
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

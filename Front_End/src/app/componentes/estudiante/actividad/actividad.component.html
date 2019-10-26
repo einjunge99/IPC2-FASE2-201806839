@@ -1,0 +1,30 @@
+<br>
+<div class="container">
+    <h1 class="display-4">Cursos asignados</h1>
+    <br>
+    <div *ngFor="let cursos of registroAsignados">
+        <div class="card">
+            <h5 class="card-header">{{cursos.nombre}}-{{cursos.descripcion}}</h5>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h5 class="card-title"><b>Sección:</b> {{cursos.seccion}}</h5>
+                        <p class="card-text"> Horario: {{cursos.inicio}} a {{cursos.fin}}</p>
+                    </div>
+              
+                    <div class="col">
+                        <button class="btn btn-login" (click)="navegar(cursos.cod_ASIGNACION)">Detalle</button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-login" (click)="ticket(cursos.cod_ASIGNACION)">Tickets</button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-login" (click)="foro(cursos.cod_ASIGNACION)">Foro</button>
+                    </div>
+                </div>
+            </div>
+         
+        </div>
+        <br>
+    </div>
+</div>

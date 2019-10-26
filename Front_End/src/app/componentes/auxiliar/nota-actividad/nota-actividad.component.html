@@ -1,0 +1,75 @@
+<br>
+<div class="container">
+    <h1 class="display-4">Estudiantes registrados</h1>
+    <br>
+    <div *ngFor="let usuario of registroAlumnos">
+        <div class="card">
+            <form [formGroup]="primerForm">
+                <h5 class="card-header">{{usuario.carne}}-{{usuario.nombre}}</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title">CALIFICACION</h5>
+                            <input type="text" formControlName="nota" class="form-control " maxlength="3"
+                                pattern="[0-9]*" [ngClass]="{ 'is-invalid': submitted && ff.nota.errors }">
+                            <div *ngIf="submitted && ff.nota.errors" class="invalid-feedback">
+                                <div *ngIf="ff.nota.errors.pattern">Formato inválido</div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <br><br>
+
+                            <h3 class="card-title text-muted">/100</h3>
+                        </div>
+
+
+                        <div class="col-8">
+                            <div *ngIf="usuario.archivo=='false'">
+
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-login" (click)="agregarNota(usuario.cod_USUARIO)">Guardar</button>
+                </div>
+            </form>
+        </div>
+        <br>
+    </div>
+    <div *ngFor="let result of registroNotaAlumnos">
+        <div class="card">
+            <form [formGroup]="primerForm">
+                <h5 class="card-header">{{result.carne}}-{{result.nombre}}</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title">CALIFICACION</h5>
+                            <input type="text" formControlName="nota" value="{{result.nota}}" class="form-control "
+                                maxlength="3" pattern="[0-9]*"
+                                [ngClass]="{ 'is-invalid': submitted && ff.nota.errors }">
+                            <div *ngIf="submitted && ff.nota.errors" class="invalid-feedback">
+                                <div *ngIf="ff.nota.errors.pattern">Formato inválido</div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <br><br>
+
+                            <h3 class="card-title text-muted">/100</h3>
+                        </div>
+
+
+                        <div class="col-8">
+                            <div *ngIf="result.archivo=='false'">
+
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                    disabled>{{result.contenido}}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-login" (click)="actualizarNota(result.cod_USUARIO)">Actualizar</button>
+                </div>
+            </form>
+        </div>
+        <br>
+    </div>
+</div>

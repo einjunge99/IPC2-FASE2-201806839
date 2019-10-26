@@ -1,0 +1,37 @@
+<section class="login-block">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col col-lg-6 login-sec">
+        <h2 class="text-center">Inicio de sesión</h2>
+        <form class="login-form"  [formGroup]="primerForm" (ngSubmit)="inicio()">
+          <div class="form-group">
+            <label class="text-uppercase">Usuario</label>
+            <input type="text" class="form-control" formControlName="carne" pattern="[0-9]*" maxlength="9" [ngClass]="{ 'is-invalid': submitted && f.carne.errors}">
+            <div *ngIf="submitted && f.carne.errors" class="invalid-feedback">
+                <div *ngIf="f.carne.errors.required">Campo obligatorio</div>
+                <div *ngIf="f.carne.errors.pattern">Formato invalido</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1" class="text-uppercase">Contraseña</label>
+            <input type="password" class="form-control" formControlName="contra"  [ngClass]="{ 'is-invalid': submitted && f.contra.errors}">
+            <div *ngIf="submitted && f.contra.errors" class="invalid-feedback">
+                <div *ngIf="f.contra.errors.required">Campo obligatorio</div>
+            </div>
+          </div>
+
+
+          <div class="form-check">
+
+           <button type="submit" class="btn btn-login float-right">Ingresar</button>
+            <small>No eres miembro? <a routerLink="registro"><b>registrate!</b></a></small>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</section>

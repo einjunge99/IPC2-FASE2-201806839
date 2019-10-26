@@ -1,0 +1,107 @@
+<br>
+<div class="container">
+    <h1 class="display-4">Registro de usuarios</h1>
+    <div class="row">
+        <div class="col">
+
+            <form class="login-form" [formGroup]="primerForm" (ngSubmit)="agregarUsuario()">
+                <div class="form-group">
+                    <label for="exampleInputEmail1" class="">Nombre</label>
+                    <input type="text" class="form-control" formControlName="nombre" pattern="[A-Z|a-z]*"
+                        [ngClass]="{ 'is-invalid': submitted && f.nombre.errors}">
+                    <div *ngIf="submitted && f.nombre.errors" class="invalid-feedback">
+                        <div *ngIf="f.nombre.errors.required">Campo obligatorio</div>
+                        <div *ngIf="f.nombre.errors.pattern">Formato invalido</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <label for="exampleInputEmail1" class="">Carné estudiantil</label>
+                            <input type="text" class="form-control" formControlName="carne" minlength="9" maxlength="9"
+                                pattern="[0-9]*" [ngClass]="{ 'is-invalid': submitted && f.carne.errors}">
+                            <div *ngIf="submitted && f.carne.errors" class="invalid-feedback">
+                                <div *ngIf="f.carne.errors.required">Campo obligatorio</div>
+                                <div *ngIf="f.carne.errors.pattern">Formato invalido</div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label>Tipo de usuario</label>
+                            <select class="form-control" formControlName="tipo"
+                                [ngClass]="{ 'is-invalid': submitted && f.tipo.errors}">
+                                <option value="estudiante" selected>Estudiante</option>
+                                <option value="auxiliar">Auxiliar</option>
+                            </select>
+                            <div *ngIf="submitted && f.tipo.errors" class="invalid-feedback">
+                                <div *ngIf="f.tipo.errors.required">Campo obligatorio</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1" class="">Correo electrónico</label>
+                    <input type="text" class="form-control" formControlName="correo"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{3}$"
+                        [ngClass]="{ 'is-invalid': submitted && f.correo.errors}">
+                    <div *ngIf="submitted && f.correo.errors" class="invalid-feedback">
+                        <div *ngIf="f.correo.errors.required">Campo obligatorio</div>
+                        <div *ngIf="f.correo.errors.pattern">Formato invalido</div>
+                    </div>
+
+
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1" class="">Contraseña</label>
+                    <br>
+                    <small class="text-muted">Debe incluir mínimo una mayuscula y un número. Ocho caracteres</small>
+                    <input type="password" class="form-control" formControlName="contra"
+                        pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z\d$@$!%*?&].{8,}"
+                        [ngClass]="{ 'is-invalid': submitted && f.contra.errors}">
+                    <div *ngIf="submitted && f.contra.errors" class="invalid-feedback">
+                        <div *ngIf="f.contra.errors.required">Campo obligatorio</div>
+                        <div *ngIf="f.contra.errors.pattern">Formato invalido</div>
+                    </div>
+                </div>
+
+
+                <div class="form-check">
+                    <button type="submit" class="btn btn-login float-right">Registrar</button>
+                </div>
+            </form>
+        </div>
+        <div class="col">
+
+            <div class="overflow-auto">
+                <div *ngFor="let data of usuarios">
+                    <div class="card">
+                        <div class="card-header">
+                            {{data.carne}} {{data.nombre}}
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-10">
+                                    <div *ngIf="data.descripcion=='estudiante'">
+                                            <div style="color: #DE6262">{{data.descripcion}}</div>
+                                    </div>
+                                    <div *ngIf="data.descripcion!='estudiante'">
+                                            <div style="color: green">{{data.descripcion}}</div>
+                                    </div>
+                                    <b> Contraseña: </b>{{data.contra}}
+                                    <b>Correo:</b> {{data.correo}}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <br>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

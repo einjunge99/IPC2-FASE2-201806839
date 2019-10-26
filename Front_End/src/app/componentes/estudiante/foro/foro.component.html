@@ -1,0 +1,27 @@
+<div class="container">
+    <br>
+    <h1 class="display-4">Tus foros</h1>
+    <br>
+    <div *ngIf="this.foros.length==0">
+        <h1 class="display-5">ups...parece que no hay nada aquí :(</h1>
+    </div>
+    <div class="card-deck">
+        <div class="panel-group" *ngFor="let act of foros">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">{{act.titulo}}</h4>
+                    <h6 class="card-title">Descripcion </h6>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                        disabled>{{act.descripcion}}</textarea>
+                    <p class="card-text"> <small class="text-muted">Limite: {{act.completa}}</small></p>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-login" (click)="mensajes(act.cod_FORO)">Detalles</button>
+                </div>
+                <div>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+</div>
